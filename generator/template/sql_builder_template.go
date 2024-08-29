@@ -2,11 +2,12 @@ package template
 
 import (
 	"fmt"
-	"github.com/go-jet/jet/v2/generator/metadata"
-	"github.com/go-jet/jet/v2/internal/utils/dbidentifier"
 	"path"
 	"strings"
 	"unicode"
+
+	"github.com/go-jet/jet/v2/generator/metadata"
+	"github.com/go-jet/jet/v2/internal/utils/dbidentifier"
 )
 
 // SQLBuilder is template for generating sql builder files
@@ -54,13 +55,14 @@ func (sb SQLBuilder) UseEnum(enumFunc func(enum metadata.Enum) EnumSQLBuilder) S
 
 // TableSQLBuilder is template for generating table SQLBuilder files
 type TableSQLBuilder struct {
-	Skip         bool
-	Path         string
-	FileName     string
-	InstanceName string
-	TypeName     string
-	DefaultAlias string
-	Column       func(columnMetaData metadata.Column) TableSQLBuilderColumn
+	Skip             bool
+	Path             string
+	FileName         string
+	InstanceName     string
+	TypeName         string
+	DefaultAlias     string
+	Column           func(columnMetaData metadata.Column) TableSQLBuilderColumn
+	TemplateOverride *string
 }
 
 // ViewSQLBuilder is template for generating view SQLBuilder files

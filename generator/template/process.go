@@ -4,10 +4,11 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"github.com/go-jet/jet/v2/internal/utils/filesys"
 	"path"
 	"strings"
 	"text/template"
+
+	"github.com/go-jet/jet/v2/internal/utils/filesys"
 
 	"github.com/go-jet/jet/v2/generator/metadata"
 	"github.com/go-jet/jet/v2/internal/jet"
@@ -188,8 +189,13 @@ func processTableSQLBuilder(fileTypes, dirPath string,
 			return fmt.Errorf("failed to create table sql builder directory - %s: %w", tableSQLBuilderPath, err)
 		}
 
+		usedBuilderTemplate := tableSQLBuilderTemplate
+		if tableSQLBuilder.TemplateOverride != nil {
+			usedBuilderTemplate = *tableSQLBuilder.TemplateOverride
+		}
+
 		text, err := generateTemplate(
-			autoGenWarningTemplate+tableSQLBuilderTemplate,
+			autoGenWarningTemplate+usedBuilderTemplate,
 			tableMetaData,
 			template.FuncMap{
 				"package": func() string {
