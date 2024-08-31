@@ -137,7 +137,7 @@ jobs:
       - run:  |
           go test -v ./... \
             -covermode=atomic \
-            -coverpkg=github.com/go-jet/jet/v2/postgres/...,github.com/go-jet/jet/v2/mysql/...,github.com/go-jet/jet/v2/sqlite/...,github.com/go-jet/jet/v2/qrm/...,github.com/go-jet/jet/v2/generator/...,github.com/go-jet/jet/v2/internal/... \
+            -coverpkg=github.com/hunayntech/hynjet/v2/postgres/...,github.com/hunayntech/hynjet/v2/mysql/...,github.com/hunayntech/hynjet/v2/sqlite/...,github.com/hunayntech/hynjet/v2/qrm/...,github.com/hunayntech/hynjet/v2/generator/...,github.com/hunayntech/hynjet/v2/internal/... \
             -coverprofile=cover.out 2>&1 | go-junit-report > $TEST_RESULTS/results.xml
 
       # run mariaDB and cockroachdb tests. No need to collect coverage, because coverage is already included with mysql and postgres tests
