@@ -1,6 +1,6 @@
 package postgres
 
-import "github.com/go-jet/jet/v2/internal/jet"
+import "github.com/hunayntech/hynjet/v2/internal/jet"
 
 // SelectTable is interface for postgres sub-queries
 type SelectTable interface {

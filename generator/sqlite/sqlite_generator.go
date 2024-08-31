@@ -3,9 +3,9 @@ package sqlite
 import (
 	"database/sql"
 	"fmt"
-	"github.com/go-jet/jet/v2/generator/metadata"
-	"github.com/go-jet/jet/v2/generator/template"
-	"github.com/go-jet/jet/v2/sqlite"
+	"github.com/hunayntech/hynjet/v2/generator/metadata"
+	"github.com/hunayntech/hynjet/v2/generator/template"
+	"github.com/hunayntech/hynjet/v2/sqlite"
 )
 
 // GenerateDSN generates jet files using dsn connection string

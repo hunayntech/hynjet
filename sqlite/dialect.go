@@ -1,7 +1,7 @@
 package sqlite
 
 import (
-	"github.com/go-jet/jet/v2/internal/jet"
+	"github.com/hunayntech/hynjet/v2/internal/jet"
 )
 
 // Dialect is implementation of SQL Builder for SQLite databases.

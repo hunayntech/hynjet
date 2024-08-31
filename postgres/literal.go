@@ -3,7 +3,7 @@ package postgres
 import (
 	"time"
 
-	"github.com/go-jet/jet/v2/internal/jet"
+	"github.com/hunayntech/hynjet/v2/internal/jet"
 )
 
 // Bool is boolean literal constructor

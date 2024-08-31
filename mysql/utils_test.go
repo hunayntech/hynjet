@@ -1,8 +1,8 @@
 package mysql
 
 import (
-	"github.com/go-jet/jet/v2/internal/jet"
-	"github.com/go-jet/jet/v2/internal/testutils"
+	"github.com/hunayntech/hynjet/v2/internal/jet"
+	"github.com/hunayntech/hynjet/v2/internal/testutils"
 	"testing"
 )
 

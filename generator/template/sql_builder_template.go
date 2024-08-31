@@ -6,8 +6,8 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/go-jet/jet/v2/generator/metadata"
-	"github.com/go-jet/jet/v2/internal/utils/dbidentifier"
+	"github.com/hunayntech/hynjet/v2/generator/metadata"
+	"github.com/hunayntech/hynjet/v2/internal/utils/dbidentifier"
 )
 
 // SQLBuilder is template for generating sql builder files

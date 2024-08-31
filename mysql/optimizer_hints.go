@@ -2,7 +2,7 @@ package mysql
 
 import (
 	"fmt"
-	"github.com/go-jet/jet/v2/internal/jet"
+	"github.com/hunayntech/hynjet/v2/internal/jet"
 )
 
 // OptimizerHint provides a way to optimize query execution per-statement basis

@@ -3,17 +3,17 @@ package mysql
 import (
 	"context"
 	"database/sql"
-	"github.com/go-jet/jet/v2/postgres"
+	"github.com/hunayntech/hynjet/v2/postgres"
 	"strings"
 	"testing"
 	"time"
 
-	"github.com/go-jet/jet/v2/internal/testutils"
-	. "github.com/go-jet/jet/v2/mysql"
-	"github.com/go-jet/jet/v2/tests/.gentestdata/mysql/dvds/enum"
-	"github.com/go-jet/jet/v2/tests/.gentestdata/mysql/dvds/model"
-	. "github.com/go-jet/jet/v2/tests/.gentestdata/mysql/dvds/table"
-	"github.com/go-jet/jet/v2/tests/.gentestdata/mysql/dvds/view"
+	"github.com/hunayntech/hynjet/v2/internal/testutils"
+	. "github.com/hunayntech/hynjet/v2/mysql"
+	"github.com/hunayntech/hynjet/v2/tests/.gentestdata/mysql/dvds/enum"
+	"github.com/hunayntech/hynjet/v2/tests/.gentestdata/mysql/dvds/model"
+	. "github.com/hunayntech/hynjet/v2/tests/.gentestdata/mysql/dvds/table"
+	"github.com/hunayntech/hynjet/v2/tests/.gentestdata/mysql/dvds/view"
 
 	"github.com/stretchr/testify/require"
 )

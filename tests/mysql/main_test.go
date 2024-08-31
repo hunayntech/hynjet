@@ -3,9 +3,9 @@ package mysql
 import (
 	"context"
 	"database/sql"
-	jetmysql "github.com/go-jet/jet/v2/mysql"
-	"github.com/go-jet/jet/v2/postgres"
-	"github.com/go-jet/jet/v2/tests/dbconfig"
+	jetmysql "github.com/hunayntech/hynjet/v2/mysql"
+	"github.com/hunayntech/hynjet/v2/postgres"
+	"github.com/hunayntech/hynjet/v2/tests/dbconfig"
 	"github.com/stretchr/testify/require"
 	"math/rand"
 	"runtime"

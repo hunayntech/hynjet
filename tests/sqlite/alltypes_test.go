@@ -1,13 +1,13 @@
 package sqlite
 
 import (
-	"github.com/go-jet/jet/v2/internal/testutils"
-	. "github.com/go-jet/jet/v2/sqlite"
-	"github.com/go-jet/jet/v2/tests/.gentestdata/sqlite/test_sample/model"
-	. "github.com/go-jet/jet/v2/tests/.gentestdata/sqlite/test_sample/table"
-	"github.com/go-jet/jet/v2/tests/.gentestdata/sqlite/test_sample/view"
-	"github.com/go-jet/jet/v2/tests/testdata/results/common"
 	"github.com/google/uuid"
+	"github.com/hunayntech/hynjet/v2/internal/testutils"
+	. "github.com/hunayntech/hynjet/v2/sqlite"
+	"github.com/hunayntech/hynjet/v2/tests/.gentestdata/sqlite/test_sample/model"
+	. "github.com/hunayntech/hynjet/v2/tests/.gentestdata/sqlite/test_sample/table"
+	"github.com/hunayntech/hynjet/v2/tests/.gentestdata/sqlite/test_sample/view"
+	"github.com/hunayntech/hynjet/v2/tests/testdata/results/common"
 	"github.com/shopspring/decimal"
 	"github.com/stretchr/testify/require"
 	"strings"

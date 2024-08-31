@@ -6,10 +6,10 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/go-jet/jet/v2/generator/metadata"
-	"github.com/go-jet/jet/v2/generator/template"
-	"github.com/go-jet/jet/v2/mysql"
 	mysqldr "github.com/go-sql-driver/mysql"
+	"github.com/hunayntech/hynjet/v2/generator/metadata"
+	"github.com/hunayntech/hynjet/v2/generator/template"
+	"github.com/hunayntech/hynjet/v2/mysql"
 )
 
 const mysqlMaxConns = 10

@@ -2,13 +2,13 @@ package postgres
 
 import (
 	"context"
-	"github.com/go-jet/jet/v2/internal/testutils"
+	"github.com/hunayntech/hynjet/v2/internal/testutils"
 	"github.com/stretchr/testify/require"
 	"testing"
 	"time"
 
-	. "github.com/go-jet/jet/v2/postgres"
-	. "github.com/go-jet/jet/v2/tests/.gentestdata/jetdb/dvds/table"
+	. "github.com/hunayntech/hynjet/v2/postgres"
+	. "github.com/hunayntech/hynjet/v2/tests/.gentestdata/jetdb/dvds/table"
 )
 
 func TestLockTable(t *testing.T) {

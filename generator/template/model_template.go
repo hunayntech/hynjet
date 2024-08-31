@@ -2,9 +2,9 @@ package template
 
 import (
 	"fmt"
-	"github.com/go-jet/jet/v2/generator/metadata"
-	"github.com/go-jet/jet/v2/internal/utils/dbidentifier"
 	"github.com/google/uuid"
+	"github.com/hunayntech/hynjet/v2/generator/metadata"
+	"github.com/hunayntech/hynjet/v2/internal/utils/dbidentifier"
 	"github.com/jackc/pgtype"
 	"path"
 	"reflect"

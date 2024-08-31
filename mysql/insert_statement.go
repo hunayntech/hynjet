@@ -1,6 +1,6 @@
 package mysql
 
-import "github.com/go-jet/jet/v2/internal/jet"
+import "github.com/hunayntech/hynjet/v2/internal/jet"
 
 // InsertStatement is interface for SQL INSERT statements
 type InsertStatement interface {

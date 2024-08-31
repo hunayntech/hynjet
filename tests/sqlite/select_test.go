@@ -2,17 +2,17 @@ package sqlite
 
 import (
 	"context"
-	model2 "github.com/go-jet/jet/v2/tests/.gentestdata/sqlite/chinook/model"
-	"github.com/go-jet/jet/v2/tests/.gentestdata/sqlite/chinook/table"
+	model2 "github.com/hunayntech/hynjet/v2/tests/.gentestdata/sqlite/chinook/model"
+	"github.com/hunayntech/hynjet/v2/tests/.gentestdata/sqlite/chinook/table"
 	"strings"
 	"testing"
 	"time"
 
-	"github.com/go-jet/jet/v2/internal/testutils"
-	. "github.com/go-jet/jet/v2/sqlite"
-	"github.com/go-jet/jet/v2/tests/.gentestdata/sqlite/sakila/model"
-	. "github.com/go-jet/jet/v2/tests/.gentestdata/sqlite/sakila/table"
-	"github.com/go-jet/jet/v2/tests/.gentestdata/sqlite/sakila/view"
+	"github.com/hunayntech/hynjet/v2/internal/testutils"
+	. "github.com/hunayntech/hynjet/v2/sqlite"
+	"github.com/hunayntech/hynjet/v2/tests/.gentestdata/sqlite/sakila/model"
+	. "github.com/hunayntech/hynjet/v2/tests/.gentestdata/sqlite/sakila/table"
+	"github.com/hunayntech/hynjet/v2/tests/.gentestdata/sqlite/sakila/view"
 
 	"github.com/stretchr/testify/require"
 )

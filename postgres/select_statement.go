@@ -3,7 +3,7 @@ package postgres
 import (
 	"math"
 
-	"github.com/go-jet/jet/v2/internal/jet"
+	"github.com/hunayntech/hynjet/v2/internal/jet"
 )
 
 // RowLock is interface for SELECT statement row lock types

@@ -7,10 +7,10 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/go-jet/jet/v2/internal/testutils"
-	"github.com/go-jet/jet/v2/tests/.gentestdata/mysql/dvds/model"
+	"github.com/hunayntech/hynjet/v2/internal/testutils"
+	"github.com/hunayntech/hynjet/v2/tests/.gentestdata/mysql/dvds/model"
 
-	. "github.com/go-jet/jet/v2/mysql"
+	. "github.com/hunayntech/hynjet/v2/mysql"
 )
 
 func TestRawStatementSelect(t *testing.T) {

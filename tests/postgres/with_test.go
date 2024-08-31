@@ -2,10 +2,10 @@ package postgres
 
 import (
 	"context"
-	"github.com/go-jet/jet/v2/internal/testutils"
-	. "github.com/go-jet/jet/v2/postgres"
-	"github.com/go-jet/jet/v2/tests/.gentestdata/jetdb/northwind/model"
-	. "github.com/go-jet/jet/v2/tests/.gentestdata/jetdb/northwind/table"
+	"github.com/hunayntech/hynjet/v2/internal/testutils"
+	. "github.com/hunayntech/hynjet/v2/postgres"
+	"github.com/hunayntech/hynjet/v2/tests/.gentestdata/jetdb/northwind/model"
+	. "github.com/hunayntech/hynjet/v2/tests/.gentestdata/jetdb/northwind/table"
 	"github.com/stretchr/testify/require"
 	"testing"
 )

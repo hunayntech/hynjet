@@ -7,10 +7,10 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/go-jet/jet/v2/internal/testutils"
-	. "github.com/go-jet/jet/v2/postgres"
-	"github.com/go-jet/jet/v2/tests/.gentestdata/jetdb/test_sample/model"
-	. "github.com/go-jet/jet/v2/tests/.gentestdata/jetdb/test_sample/table"
+	"github.com/hunayntech/hynjet/v2/internal/testutils"
+	. "github.com/hunayntech/hynjet/v2/postgres"
+	"github.com/hunayntech/hynjet/v2/tests/.gentestdata/jetdb/test_sample/model"
+	. "github.com/hunayntech/hynjet/v2/tests/.gentestdata/jetdb/test_sample/table"
 
 	"github.com/shopspring/decimal"
 )
