@@ -126,7 +126,7 @@ type {{$modelTableTemplate.TypeName}} struct {
 {{- end}}
 {{- range .Relations}}
 {{- $field := structRelationField .}}
-	{{$field.Name}} {{$field.Type}} ` + "{{$field.TagsString}}" + `{{end}}
+	{{$field.Name}} {{$field.Type}} ` + "{{$field.TagsString}}" + `
 {{- end}}
 }
 
