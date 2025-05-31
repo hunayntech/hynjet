@@ -304,10 +304,11 @@ func processTableModels(fileTypes, modelDirPath string, tablesMetaData []metadat
 	for _, tableMetaData := range tablesMetaData {
 		var tableTemplate TableModel
 		for key, modelConfig := range hynConfig.ModelConfig {
-			fmt.Printf("search config for %s %s", key, tableMetaData.Name)
 			if strings.ToLower(key) == strings.ToLower(tableMetaData.Name) {
 				var relations []metadata.Relation
+				fmt.Printf("found config for %s\n", key)
 				for fieldName, relation := range modelConfig.Relations {
+					fmt.Printf("add relation of %s\n", fieldName)
 					relations = append(relations, metadata.Relation{
 						Key:        fieldName,
 						Model:      relation.Model,
@@ -316,7 +317,7 @@ func processTableModels(fileTypes, modelDirPath string, tablesMetaData []metadat
 						References: relation.References,
 					})
 				}
-				tableMetaData.SetRelations(relations)
+				tableMetaData.Relations = relations
 			}
 		}
 		if fileTypes == "table" {
