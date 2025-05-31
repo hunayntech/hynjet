@@ -305,7 +305,7 @@ func processTableModels(fileTypes, modelDirPath string, tablesMetaData []metadat
 		var tableTemplate TableModel
 		for key, modelConfig := range hynConfig.ModelConfig {
 			fmt.Printf("search config for %s %s", key, tableMetaData.Name)
-			if key == tableMetaData.Name {
+			if strings.ToLower(key) == strings.ToLower(tableMetaData.Name) {
 				var relations []metadata.Relation
 				for fieldName, relation := range modelConfig.Relations {
 					relations = append(relations, metadata.Relation{
