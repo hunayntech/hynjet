@@ -2,14 +2,15 @@ package template
 
 import (
 	"fmt"
-	"github.com/google/uuid"
-	"github.com/hunayntech/hynjet/v2/generator/metadata"
-	"github.com/hunayntech/hynjet/v2/internal/utils/dbidentifier"
-	"github.com/jackc/pgtype"
 	"path"
 	"reflect"
 	"strings"
 	"time"
+
+	"github.com/google/uuid"
+	"github.com/hunayntech/hynjet/v2/generator/metadata"
+	"github.com/hunayntech/hynjet/v2/internal/utils/dbidentifier"
+	"github.com/jackc/pgtype"
 )
 
 // Model is template for model files generation
@@ -67,6 +68,7 @@ type TableModel struct {
 	FileName string
 	TypeName string
 	Field    func(columnMetaData metadata.Column) TableModelField
+	Relation func(relationMetaData metadata.Relation) TableModelRelationField
 }
 
 // ViewModel is template for view model files generation
@@ -81,6 +83,7 @@ func DefaultTableModel(tableMetaData metadata.Table) TableModel {
 		FileName: dbidentifier.ToGoFileName(tableMetaData.Name),
 		TypeName: dbidentifier.ToGoIdentifier(tableMetaData.Name),
 		Field:    DefaultTableModelField,
+		Relation: DefaultTableRelationModelField,
 	}
 }
 
@@ -161,6 +164,12 @@ type TableModelField struct {
 	Tags []string
 }
 
+type TableModelRelationField struct {
+	Name string
+	Type string
+	Tags []string
+}
+
 // DefaultTableModelField returns default TableModelField implementation
 func DefaultTableModelField(columnMetaData metadata.Column) TableModelField {
 	var tags []string
@@ -172,6 +181,29 @@ func DefaultTableModelField(columnMetaData metadata.Column) TableModelField {
 	return TableModelField{
 		Name: dbidentifier.ToGoIdentifier(columnMetaData.Name),
 		Type: getType(columnMetaData),
+		Tags: tags,
+	}
+}
+
+func DefaultTableRelationModelField(relationMetaData metadata.Relation) TableModelRelationField {
+	var tags []string
+
+	if relationMetaData.ForeignKey != nil {
+		tags = append(tags, `gorm:"foreignKey:`+*relationMetaData.ForeignKey+`"`)
+	}
+
+	if relationMetaData.References != nil {
+		tags = append(tags, `gorm:"references:`+*relationMetaData.References+`"`)
+	}
+
+	relationType := relationMetaData.Model
+	if relationMetaData.Type != nil && *relationMetaData.Type == "one2many" {
+		relationType = "[]" + relationType
+	}
+
+	return TableModelRelationField{
+		Name: relationMetaData.Key,
+		Type: relationType,
 		Tags: tags,
 	}
 }
@@ -196,6 +228,14 @@ func (f TableModelField) UseTags(tags ...string) TableModelField {
 
 // TagsString returns tags string representation
 func (f TableModelField) TagsString() string {
+	if len(f.Tags) == 0 {
+		return ""
+	}
+
+	return fmt.Sprintf("`%s`", strings.Join(f.Tags, " "))
+}
+
+func (f TableModelRelationField) TagsString() string {
 	if len(f.Tags) == 0 {
 		return ""
 	}

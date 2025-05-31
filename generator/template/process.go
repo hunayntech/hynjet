@@ -2,8 +2,10 @@ package template
 
 import (
 	"bytes"
+	"encoding/json"
 	"errors"
 	"fmt"
+	"os"
 	"path"
 	"strings"
 	"text/template"
@@ -14,8 +16,23 @@ import (
 	"github.com/hunayntech/hynjet/v2/internal/jet"
 )
 
+func loadConfig() Config {
+	data, err := os.ReadFile("./hynjet.config.json")
+	if err != nil {
+		panic(err)
+	}
+
+	var config Config
+	if err := json.Unmarshal(data, &config); err != nil {
+		panic(err)
+	}
+
+	return config
+}
+
 // ProcessSchema will process schema metadata and constructs go files using generator Template
 func ProcessSchema(dirPath string, schemaMetaData metadata.Schema, generatorTemplate Template) error {
+	hynConfig := loadConfig()
 	if schemaMetaData.IsEmpty() {
 		return nil
 	}
@@ -30,7 +47,7 @@ func ProcessSchema(dirPath string, schemaMetaData metadata.Schema, generatorTemp
 		return errors.New("failed to cleanup generated files")
 	}
 
-	err = processModel(schemaPath, schemaMetaData, schemaTemplate)
+	err = processModel(schemaPath, schemaMetaData, schemaTemplate, hynConfig)
 	if err != nil {
 		return fmt.Errorf("failed to generate model types: %w", err)
 	}
@@ -43,7 +60,7 @@ func ProcessSchema(dirPath string, schemaMetaData metadata.Schema, generatorTemp
 	return nil
 }
 
-func processModel(dirPath string, schemaMetaData metadata.Schema, schemaTemplate Schema) error {
+func processModel(dirPath string, schemaMetaData metadata.Schema, schemaTemplate Schema, hynConfig Config) error {
 	modelTemplate := schemaTemplate.Model
 
 	if modelTemplate.Skip {
@@ -58,12 +75,12 @@ func processModel(dirPath string, schemaMetaData metadata.Schema, schemaTemplate
 		return fmt.Errorf("destination dir path does not exist: %w", err)
 	}
 
-	err = processTableModels("table", modelDirPath, schemaMetaData.TablesMetaData, modelTemplate)
+	err = processTableModels("table", modelDirPath, schemaMetaData.TablesMetaData, modelTemplate, hynConfig)
 	if err != nil {
 		return fmt.Errorf("failed to generate table model types: %w", err)
 	}
 
-	err = processTableModels("view", modelDirPath, schemaMetaData.ViewsMetaData, modelTemplate)
+	err = processTableModels("view", modelDirPath, schemaMetaData.ViewsMetaData, modelTemplate, hynConfig)
 	if err != nil {
 		return fmt.Errorf("failed to generate view model types: %w", err)
 	}
@@ -278,7 +295,7 @@ func insertedRowAlias(dialect jet.Dialect) string {
 	return "excluded"
 }
 
-func processTableModels(fileTypes, modelDirPath string, tablesMetaData []metadata.Table, modelTemplate Model) error {
+func processTableModels(fileTypes, modelDirPath string, tablesMetaData []metadata.Table, modelTemplate Model, hynConfig Config) error {
 	if len(tablesMetaData) == 0 {
 		return nil
 	}
@@ -286,7 +303,22 @@ func processTableModels(fileTypes, modelDirPath string, tablesMetaData []metadat
 
 	for _, tableMetaData := range tablesMetaData {
 		var tableTemplate TableModel
-
+		for key, modelConfig := range hynConfig.ModelConfig {
+			fmt.Printf("search config for %s %s", key, tableMetaData.Name)
+			if key == tableMetaData.Name {
+				var relations []metadata.Relation
+				for fieldName, relation := range modelConfig.Relations {
+					relations = append(relations, metadata.Relation{
+						Key:        fieldName,
+						Model:      relation.Model,
+						Type:       relation.Type,
+						ForeignKey: relation.ForeignKey,
+						References: relation.References,
+					})
+				}
+				tableMetaData.SetRelations(relations)
+			}
+		}
 		if fileTypes == "table" {
 			tableTemplate = modelTemplate.Table(tableMetaData)
 		} else {
@@ -312,6 +344,9 @@ func processTableModels(fileTypes, modelDirPath string, tablesMetaData []metadat
 				},
 				"structField": func(columnMetaData metadata.Column) TableModelField {
 					return tableTemplate.Field(columnMetaData)
+				},
+				"structRelationField": func(relationMetaData metadata.Relation) TableModelRelationField {
+					return tableTemplate.Relation(relationMetaData)
 				},
 			})
 		if err != nil {
