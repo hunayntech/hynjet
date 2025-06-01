@@ -196,6 +196,8 @@ func DefaultTableRelationModelField(relationMetaData metadata.Relation) TableMod
 		tags = append(tags, `gorm:"references:`+*relationMetaData.References+`"`)
 	}
 
+	tags = append(tags, fmt.Sprintf(`json:"%s"`, SnakeToCamel(relationMetaData.Key, false)))
+
 	relationType := relationMetaData.Model
 	if relationMetaData.Type != nil && *relationMetaData.Type == "one2many" {
 		relationType = "[]" + relationType
@@ -203,7 +205,7 @@ func DefaultTableRelationModelField(relationMetaData metadata.Relation) TableMod
 
 	return TableModelRelationField{
 		Name: relationMetaData.Key,
-		Type: relationType,
+		Type: "*" + relationType,
 		Tags: tags,
 	}
 }
