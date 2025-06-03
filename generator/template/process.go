@@ -315,6 +315,7 @@ func processTableModels(fileTypes, modelDirPath string, tablesMetaData []metadat
 						Type:       relation.Type,
 						ForeignKey: relation.ForeignKey,
 						References: relation.References,
+						Tags:       relation.Tags,
 					})
 				}
 				tableMetaData.Relations = relations

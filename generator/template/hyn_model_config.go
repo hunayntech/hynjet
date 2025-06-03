@@ -1,10 +1,11 @@
 package template
 
 type RelationConfig struct {
-	Model      string  `json:"model"`
-	Type       *string `json:"type"`
-	ForeignKey *string `json:"foreignKey"`
-	References *string `json:"references"`
+	Model      string    `json:"model"`
+	Type       *string   `json:"type"`
+	ForeignKey *string   `json:"foreignKey"`
+	References *string   `json:"references"`
+	Tags       *[]string `json:"tags"`
 }
 
 type ModelRelations map[string]RelationConfig
