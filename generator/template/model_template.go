@@ -188,15 +188,23 @@ func DefaultTableModelField(columnMetaData metadata.Column) TableModelField {
 func DefaultTableRelationModelField(relationMetaData metadata.Relation) TableModelRelationField {
 	var tags []string
 
-	if relationMetaData.ForeignKey != nil {
-		tags = append(tags, `gorm:"foreignKey:`+*relationMetaData.ForeignKey+`"`)
-	}
-
-	if relationMetaData.References != nil {
-		tags = append(tags, `gorm:"references:`+*relationMetaData.References+`"`)
+	if relationMetaData.ForeignKey != nil && relationMetaData.References != nil {
+		tags = append(tags, `gorm:"foreignKey:`+*relationMetaData.ForeignKey+`;references:`+*relationMetaData.References+`"`)
+	} else {
+		if relationMetaData.ForeignKey != nil {
+			tags = append(tags, `gorm:"foreignKey:`+*relationMetaData.ForeignKey+`"`)
+		} else if relationMetaData.References != nil {
+			tags = append(tags, `gorm:"references:`+*relationMetaData.References+`"`)
+		}
 	}
 
 	tags = append(tags, fmt.Sprintf(`json:"%s"`, SnakeToCamel(relationMetaData.Key, false)))
+
+	if relationMetaData.Tags != nil {
+		for _, tag := range *relationMetaData.Tags {
+			tags = append(tags, tag)
+		}
+	}
 
 	relationType := relationMetaData.Model
 	if relationMetaData.Type != nil && *relationMetaData.Type == "one2many" {
